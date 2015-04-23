@@ -22,7 +22,7 @@ table, th, td {
 <span style="color:{{currentColor}}"> Current player: {{player}}</span>
 <table>
     <tr ng-repeat="row in tableIds">
-    <td ng-repeat="cell in row" id={{cell}} ng-click="markCell(cell)">{{cell}}</td>
+    <td ng-repeat="cell in row" id={{cell}} ng-click="markCell(cell)"></td>
   </tr>
 </table>
 <body ng-controller="tttCtrl" data-ng-init="mainRender()">
