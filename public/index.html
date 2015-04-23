@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tttNgApp">
+<head>
+<meta charset="utf-8">
+
+<script src="bower_components\angular\angular.js"></script>
+<script src="javascripts\tttGame.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></ref>
+<style>
+
+table, th, td {
+     border: 1px solid black;
+ }
+ td {
+    width:50px;
+    height:50px;
+ }
+</style>
+</head>
+
+<h1>Tic Tac Toe</h1>
+<span style="color:{{currentColor}}"> Current player: {{player}}</span>
+<table>
+    <tr ng-repeat="row in tableIds">
+    <td ng-repeat="cell in row" id={{cell}} ng-click="markCell(cell)">{{cell}}</td>
+  </tr>
+</table>
+<body ng-controller="tttCtrl" data-ng-init="mainRender()">
+ <button type="button" class="btn btn-primary" title="Reset" ng-click="reset()">Reset</button>
+</body>
+
+<script>
+
+
+
+</script>
+
+</html>
