@@ -89,7 +89,6 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
         var dataAlreadySetMessage = "Data already set";
 
         var win = function (data) {
-            var roundWinner;
             var winningTriples = [
                 [
                     [0, 0],
@@ -132,32 +131,22 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                     [0, 2]
                 ]
             ];
-            var allX, allO;
-            winningTriples.forEach(function (element) {
-                allX = element.every(function (curr) {
-                    //   console.log("isx: " + curr[0] + " " + curr[1]);
-                    var theval = data[curr[0]][curr[1]];
-                    // console.log("val " + theval);
-                    var isX = (theval === 'x');
-                    // console.log(isX);
-                    return isX;
+
+            var xWin = winningTriples.some(function (element) {
+                return element.every(function (curr) {
+                    return (data[curr[0]][curr[1]] === 'x');
                 });
-                if (allX) {
-                    roundWinner = 'x';
-                    return;  //poor style, leads to confusing behavior of return.
-                }
-                allO = element.every(function (curr) {
-                    var theval = data[curr[0]][curr[1]];
-                    var isO = (theval === 'o');
-                    return isO;
-                });
-                if (allO) {
-                    roundWinner = 'o';
-                    return; //poor style, leads to confusing behavior of return.
-                }
             });
-            if (allX || allO) {
-                return roundWinner;
+            if (xWin) {
+                return 'x';
+            }
+            var oWin = winningTriples.some(function (element) {
+                return element.every(function (curr) {
+                    return (data[curr[0]][curr[1]] === 'o');
+                });
+            });
+            if (oWin) {
+                return 'o';
             }
             var allCoords = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]; //replace with range
             var allSet = allCoords.every(function (curr) {
@@ -165,9 +154,9 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                 return (theval !== undefined);
             });
             if (allSet) {
-                roundWinner = 'draw';
+                return 'draw';
             }
-            return roundWinner;
+            return undefined;
         };
         var valid = function (r, c, val) {
             if ((r < 0) || (r > 2) || (r === undefined) || (isNaN(r))) {
