@@ -134,7 +134,7 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
             ];
             var allX, allO;
             winningTriples.forEach(function (element) {
-                    allX = element.every(function (curr) {
+                allX = element.every(function (curr) {
                     //   console.log("isx: " + curr[0] + " " + curr[1]);
                     var theval = data[curr[0]][curr[1]];
                     // console.log("val " + theval);
@@ -144,16 +144,16 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                 });
                 if (allX) {
                     roundWinner = 'x';
-                    return;
+                    return;  //poor style, leads to confusing behavior of return.
                 }
-                    allO = element.every(function (curr) {
+                allO = element.every(function (curr) {
                     var theval = data[curr[0]][curr[1]];
                     var isO = (theval === 'o');
                     return isO;
                 });
                 if (allO) {
                     roundWinner = 'o';
-                    return;
+                    return; //poor style, leads to confusing behavior of return.
                 }
             });
             if (allX || allO) {
