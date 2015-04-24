@@ -14,15 +14,21 @@ table, th, td {
  td {
     width:50px;
     height:50px;
+    text-align:center;
+    vertical-align:middle;
+ }
+ button
+ {
+    margin:5px;
  }
 </style>
 </head>
 
-<h1>Tic Tac Toe</h1>
+<h1>Simple Two Player Tic Tac Toe</h1>
 <span style="color:{{currentColor}}"> Current player: {{player}}</span>
 <table>
     <tr ng-repeat="row in tableIds">
-    <td ng-repeat="cell in row" id={{cell}} ng-click="markCell(cell)"></td>
+    <td ng-repeat="cell in row" id={{cell}} ng-click="markCell(cell)"><span style="font-size:35px"></span></td>
   </tr>
 </table>
 <body ng-controller="tttCtrl" data-ng-init="mainRender()">

@@ -52,23 +52,29 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
             var cell = document.getElementById(id);
             if (cell !== null) {
                 cell.style.backgroundColor = "#fff";
+                cell.children[0].textContent = "";
             }
         });
     };
 
     $scope.markCell = function (id) {
+        if ($scope.winner !== undefined) {
+            alert("Game over, click 'Reset'.");
+            return;
+        }
         var cell = document.getElementById(id);
 
         var vals = id.split(" ");
         try {
             $scope.winner = $scope.board.set(vals[0], vals[1], $scope.player);
             cell.style.backgroundColor = $scope.currentColor;
+            cell.children[0].textContent = $scope.player;
             $scope.togglePlayer();
         } catch (e) {
             alert(e);
         }
         if ($scope.winner !== undefined) {
-            alert($scope.winner);
+            alert("Winner = " + $scope.winner);
         }
     };
 
@@ -83,7 +89,7 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
         var dataAlreadySetMessage = "Data already set";
 
         var win = function (data) {
-            var winner;
+            var roundWinner;
             var winningTriples = [
                 [
                     [0, 0],
@@ -126,8 +132,9 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                     [0, 2]
                 ]
             ];
+            var allX, allO;
             winningTriples.forEach(function (element) {
-                var allX = element.every(function (curr) {
+                    allX = element.every(function (curr) {
                     //   console.log("isx: " + curr[0] + " " + curr[1]);
                     var theval = data[curr[0]][curr[1]];
                     // console.log("val " + theval);
@@ -136,22 +143,31 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                     return isX;
                 });
                 if (allX) {
-                    winner = 'x';
+                    roundWinner = 'x';
                     return;
                 }
-                var allO = element.every(function (curr) {
+                    allO = element.every(function (curr) {
                     var theval = data[curr[0]][curr[1]];
                     var isO = (theval === 'o');
                     return isO;
                 });
                 if (allO) {
-                    winner = 'o';
+                    roundWinner = 'o';
                     return;
                 }
-
-
             });
-            return winner;
+            if (allX || allO) {
+                return roundWinner;
+            }
+            var allCoords = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]; //replace with range
+            var allSet = allCoords.every(function (curr) {
+                var theval = data[curr[0]][curr[1]];
+                return (theval !== undefined);
+            });
+            if (allSet) {
+                roundWinner = 'draw';
+            }
+            return roundWinner;
         };
         var valid = function (r, c, val) {
             if ((r < 0) || (r > 2) || (r === undefined) || (isNaN(r))) {
@@ -181,8 +197,8 @@ tttNgAppModule.controller("tttCtrl", function ($scope) {
                     throw dataAlreadySetMessage;
                 }
                 m_data[r][c] = val;
-                var winner = win(m_data);
-                return winner;
+                var theWinner = win(m_data);
+                return theWinner;
 
             },
 
