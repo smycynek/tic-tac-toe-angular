@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "homepage": "https://github.com/smycynek/tic-tac-toe-angular",
   "authors": [
-    "Steven Mycynek <steven.mycynek@autodesk.com>"
+    "Steven Mycynek <sv@stevenvictor.net>"
   ],
-  "license": "MIT",
+  "license": "APACHE",
   "ignore": [
     "**/.*",
     "node_modules",
