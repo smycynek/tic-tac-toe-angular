@@ -2,14 +2,22 @@
 <html lang="en" ng-app="tttNgApp">
 <head>
 <meta charset="utf-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
 <script src="bower_components\angular\angular.js"></script>
 <script src="javascripts\tttGame.js"></script>
 <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.min.css"></ref>
-<style>
+<style type="text/css" media="screen">
 
+body {
+    margin:5px;
+}
 table, th, td {
      border: 1px solid black;
+
+ }
+ table {
+    margin:5px;
  }
  td {
     width:50px;
@@ -24,7 +32,7 @@ table, th, td {
 </style>
 </head>
 
-<h1>Simple Two Player Tic Tac Toe</h1>
+<h4>Tic Tac Toe</h4>
 <span style="color:{{currentColor}}"> Current player: {{player}}</span>
 <table>
     <tr ng-repeat="row in tableIds">
