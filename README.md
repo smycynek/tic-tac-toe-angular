@@ -4,3 +4,5 @@ I'm not very familiar with DOM events in Angular, so some of the code to get a t
 is far from ideal, but I'm working on it.
 
 *  Node users, just use 'npm install' and './bin/www'
+
+![Screen Shot](./tic-tac-toe-angular.png)
